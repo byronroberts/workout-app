@@ -2,9 +2,8 @@ package roberts.byron.workoutapp
 
 import android.app.Application
 import com.google.gson.GsonBuilder
-import com.google.gson.Gson
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import roberts.byron.workoutapp.retrofit.WorkoutAPI
 
 
