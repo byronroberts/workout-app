@@ -10,4 +10,7 @@ interface WorkoutAPI {
     @GET("muscle")
     fun getMuscles() : Call<Muscles>
 
+    @Headers("Accept: application/json")
+    @GET("exercisecategory")
+    fun getExerciseCategories() : Call<ExerciseCategories>
 }
