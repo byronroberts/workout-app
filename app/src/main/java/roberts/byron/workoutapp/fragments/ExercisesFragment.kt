@@ -1,18 +1,22 @@
 package roberts.byron.workoutapp.fragments
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import roberts.byron.workoutapp.R
 import roberts.byron.workoutapp.WorkoutApplication
+import roberts.byron.workoutapp.repository.MusclesRepository
 import roberts.byron.workoutapp.retrofit.Muscles
+import roberts.byron.workoutapp.viewmodel.MusclesViewModel
+import roberts.byron.workoutapp.viewmodel.ViewModelFactory
 
-class ExercisesFragment : Fragment(), Callback<Muscles> {
+class ExercisesFragment : Fragment() {
+
+    private lateinit var viewModel: MusclesViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_exercises, container, false)
@@ -20,18 +24,14 @@ class ExercisesFragment : Fragment(), Callback<Muscles> {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val application = activity?.application as WorkoutApplication
-        val workoutApi = application.getWorkoutApi()
-
-        val muscles = workoutApi.getMuscles()
-        muscles.enqueue(this)
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(MusclesRepository(activity?.application as WorkoutApplication))).get(MusclesViewModel::class.java)
     }
 
-    override fun onFailure(call: Call<Muscles>?, t: Throwable?) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.getMuscles().observe(this, Observer<Muscles> { muscles ->
 
+        })
     }
 
-    override fun onResponse(call: Call<Muscles>?, response: Response<Muscles>?) {
-        val muscles = response?.body()?.results?.toMutableList()
-    }
 }

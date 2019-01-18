@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/homeFragment" android:label="fragment_home">
+
+    <fragment android:id="@+id/homeFragment" android:name="roberts.byron.workoutapp.fragments.HomeFragment"
+              android:label="fragment_home">
+        <action android:id="@+id/action_homeFragment_to_exercisesFragment" app:destination="@id/exercisesFragment"/>
+    </fragment>
+    <fragment android:id="@+id/exercisesFragment" android:name="roberts.byron.workoutapp.fragments.ExercisesFragment"
+              android:label="fragment_exercises">
+    </fragment>
+    <fragment android:id="@+id/settingsFragment" android:name="roberts.byron.workoutapp.fragments.SettingsFragment"
+              android:label="SettingsFragment"/>
+</navigation>
